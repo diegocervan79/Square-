@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Invoice</title>
+</head>
+<body>
+  <h1>Invoice</h1>
+
+  <p>Invoice number: <%= invoice_number %></p>
+  <p>Date: <%= date %></p>
+  <p>Customer name: <%= customer_name %></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Unit price</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (item in items) { %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.unit_price %></td>
+          <td><%= item.total %></td>
+        </tr>
+      <% } %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">Subtotal</td>
+        <td><%= subtotal %></td>
+      </tr>
+      <tr>
+        <td colspan="3">Tax</td>
+        <td><%= tax %></td>
+      </tr>
+      <tr>
+        <td colspan="3">Total</td>
+        <td><%= total %></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <form action="/payment" method="post">
+    <label for="card_number">Card number</label>
+    <input type="text" name="card_number" id="card_number">
+
+    <label for="expiration_date">Expiration date</label>
+    <input type="text" name="expiration_date" id="expiration_date">
+
+    <label for="cvv">CVV</label>
+    <input type="text" name="cvv" id="cvv">
+
+    <input type="submit" value="Pay">
+  </form>
+</body>
+</html>
